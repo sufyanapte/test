@@ -1,6 +1,6 @@
 
 import { Routes } from '@angular/router';
-
+import { Addtocart } from './addtocart/addtocart';
 import { Home } from './home/home';
 import { Product } from './product/product';
 import { About } from './about/about';
@@ -26,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'product',
     redirectTo: 'products',
+  },
+    {
+    path: 'addtocart',
+    component: Addtocart
   },
   {
     path: '**',

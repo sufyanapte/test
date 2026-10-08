@@ -1,0 +1,255 @@
+<section class="cart-page">
+
+  <!-- PAGE HEADER -->
+
+  <div class="cart-header">
+
+    <div>
+
+      <p class="eyebrow">
+        YOUR SELECTION
+      </p>
+
+      <h1>
+        Shopping Bag
+      </h1>
+
+      <p class="cart-description">
+        Review your selected pieces before checkout.
+      </p>
+
+    </div>
+
+    <div class="item-count">
+
+      {{ getTotalItems() }}
+
+      <span>
+        Items
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- EMPTY CART -->
+
+  <div
+    class="empty-cart"
+    *ngIf="cartItems.length === 0">
+
+    <div class="empty-icon">
+
+      <i class="fa-solid fa-bag-shopping"></i>
+
+    </div>
+
+    <h2>
+      Your bag is empty
+    </h2>
+
+    <p>
+      Discover our latest collection and find
+      something you'll love.
+    </p>
+
+    <a routerLink="/product">
+      Continue Shopping
+    </a>
+
+  </div>
+
+
+  <!-- CART -->
+
+  <div
+    class="cart-layout"
+    *ngIf="cartItems.length > 0">
+
+
+    <!-- PRODUCTS -->
+
+    <div class="cart-products">
+
+      <div
+        class="cart-item"
+        *ngFor="let item of cartItems">
+
+
+        <!-- IMAGE -->
+
+        <div class="item-image">
+
+          <img
+            [src]="item.image"
+            [alt]="item.name">
+
+        </div>
+
+
+        <!-- DETAILS -->
+
+        <div class="item-details">
+
+          <p class="item-category">
+            {{ item.category }}
+          </p>
+
+          <h3>
+            {{ item.name }}
+          </h3>
+
+          <p class="item-price">
+            ${{ item.price }}
+          </p>
+
+        </div>
+
+
+        <!-- QUANTITY -->
+
+        <div class="quantity-box">
+
+          <button
+            (click)="decreaseQuantity(item)">
+
+            −
+
+          </button>
+
+          <span>
+            {{ item.quantity }}
+          </span>
+
+          <button
+            (click)="increaseQuantity(item)">
+
+            +
+
+          </button>
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="item-total">
+
+          <strong>
+            ${{ item.price * item.quantity }}
+          </strong>
+
+          <button
+            class="remove-button"
+            (click)="removeItem(item.id)">
+
+            <i class="fa-regular fa-trash-can"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <aside class="cart-summary">
+
+      <p class="summary-label">
+        ORDER SUMMARY
+      </p>
+
+      <h2>
+        Your Order
+      </h2>
+
+
+      <div class="summary-row">
+
+        <span>
+          Subtotal
+        </span>
+
+        <strong>
+          ${{ getSubtotal() }}
+        </strong>
+
+      </div>
+
+
+      <div class="summary-row">
+
+        <span>
+          Shipping
+        </span>
+
+        <strong>
+
+          <span *ngIf="getShipping() === 0">
+            Free
+          </span>
+
+          <span *ngIf="getShipping() > 0">
+            ${{ getShipping() }}
+          </span>
+
+        </strong>
+
+      </div>
+
+
+      <div class="summary-line"></div>
+
+
+      <div class="total-row">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          ${{ getTotal() }}
+        </strong>
+
+      </div>
+
+
+      <div class="free-shipping">
+
+        <i class="fa-solid fa-truck"></i>
+
+        <span>
+          Free shipping on orders over $300
+        </span>
+
+      </div>
+
+
+      <button
+        class="checkout-button"
+        (click)="checkout()">
+
+        Proceed to Checkout
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </button>
+
+
+      <a
+        routerLink="/product"
+        class="continue-shopping">
+
+        Continue Shopping
+
+      </a>
+
+    </aside>
+
+  </div>
+
+</section>
